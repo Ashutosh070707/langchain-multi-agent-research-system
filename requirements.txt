@@ -5,6 +5,7 @@ langchain-community
 streamlit
 langchain-groq
 langchain-google-genai
+requests
 
 # Tavily serach tool
 langchain-tavily
@@ -18,3 +19,6 @@ lxml
 
 # Enviroment variables
 python-dotenv
+
+# Logging/Debugging
+rich
