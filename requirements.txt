@@ -17,6 +17,9 @@ trafilatura
 requests
 lxml
 
+# UI
+streamlit
+
 # Enviroment variables
 python-dotenv
 

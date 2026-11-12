@@ -14,12 +14,13 @@ load_dotenv()
 
 os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
 
-tavily_search = TavilySearch(max_results=5)
+tavily_search = TavilySearch(max_results=2)
 
 
 @tool
-def web_search(query: str) -> str:
+def search_web(query: str) -> str:
     """Search the web for recent and reliable information on a given topic. Returns title, URL, and snippets."""
+
     response = tavily_search.invoke({"query": query})
 
     out = []
@@ -66,7 +67,7 @@ def scrape_url(url: str) -> str:
 
         if extracted and len(extracted.strip()) > 200:
             cleaned = re.sub(r"\s+", " ", extracted)
-            return cleaned[:5000]
+            return cleaned[:3000]
 
         # ──────────────────────────────────────────────────
         # Strategy 2 → readability
@@ -85,7 +86,7 @@ def scrape_url(url: str) -> str:
 
         if text and len(text.strip()) > 200:
             cleaned = re.sub(r"\s+", " ", text)
-            return cleaned[:5000]
+            return cleaned[:3000]
 
         # ──────────────────────────────────────────────────
         # Strategy 3 → fallback full page extraction
@@ -102,7 +103,7 @@ def scrape_url(url: str) -> str:
         cleaned = re.sub(r"\s+", " ", text)
 
         if cleaned:
-            return cleaned[:5000]
+            return cleaned[:3000]
 
         return "Could not extract meaningful content from the page."
 
